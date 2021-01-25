@@ -6,11 +6,16 @@ const Login = (props) => {
 
   const login = e => {
     e.preventDefault();
-    axiosWithAuth().post('/login', credentials)
+    axiosWithAuth().post('http://localhost:5000/api/login ', credentials)
       .then(res => {
+        console.log(res);
         localStorage.setItem('token', res.data.token);
         this.props.history.push('/');
       })
+      .catch(error => {
+        console.log(error)
+      })
+    
       
   }
 
