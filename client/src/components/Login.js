@@ -6,7 +6,6 @@ import BubblePage from './BubblePage';
 import { render } from '@testing-library/react';
 
 const credentials= { username: 'Lambda School', password: 'i<3Lambd4' }
-let token;
 const Login = () => {
 
 
@@ -15,8 +14,7 @@ const Login = () => {
   axios
     .post('http://localhost:5000/api/login ', credentials)
     .then(res => {
-       token = res.data;
-      console.log(token);
+      localStorage.setItem('token', res.data)
     })
     .catch(error => {
       console.log(error)
@@ -30,14 +28,13 @@ const Login = () => {
     /** */
     <div>
       <div >
-        <input type="username" value={credentials.username} />
+        <input value={credentials.username} onChange={console.log('somethings trying to change the input')}/>
       </div>
       <div >
-        <input type="password" value={credentials.password} />
+        <input value={credentials.password} onChange={console.log('somethings trying to change the input')}/>
       </div>
       <button onClick={() => render(<BubblePage></BubblePage>)} >Submit </button>
      </div>
   )
 }
-export {token};
 export default Login;
