@@ -1,22 +1,23 @@
 import React from 'react';
 //import { axiosWithAuth } from '../axiosAuth';
 //import BubblePage from "./BubblePage";
-import axios from 'axios';
 import BubblePage from './BubblePage';
 import { render } from '@testing-library/react';
 import { axiosWithAuth } from '../axiosWithAuth';
 
 
-const Login = () => {
+const Login = (props) => {
 
-  const credentials= { username: 'Lambda School', password: 'i<3Lambd4' };
+  const [credentials, setCredentials] = useState({
+    username: "Lambda School",
+    password: "i<3Lambd4",
+  });
   //preventDefault();
 
   axiosWithAuth
     .post('api/login ', credentials)
     .then(res => {
       localStorage.setItem( 'token', res.data.payload);
-      props.history.push("./bubblepage");
     })
 
     .catch(error => {
