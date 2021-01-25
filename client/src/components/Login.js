@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 //import { axiosWithAuth } from '../axiosAuth';
 //import BubblePage from "./BubblePage";
 import BubblePage from './BubblePage';
@@ -13,8 +13,10 @@ const Login = (props) => {
     password: "i<3Lambd4",
   });
   //preventDefault();
-
-  axiosWithAuth
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+  axiosWithAuth()
     .post('api/login ', credentials)
     .then(res => {
       localStorage.setItem( 'token', res.data.payload);
@@ -30,15 +32,15 @@ const Login = (props) => {
 
   return (
     /** */
-    <div>
+    <form  onSubmit={Login}>
       <div >
-        <input value={credentials.username} onChange={console.log('somethings trying to change the input')}/>
+        <input     type="username"onChange={handleChange}/>
       </div>
       <div >
-        <input value={credentials.password} onChange={console.log('somethings trying to change the input')}/>
+        <input    type="password" onChange={handleChange}/>
       </div>
-      <button onClick={() => render(<BubblePage></BubblePage>)} >Submit </button>
-     </div>
+      <button type="submit" >Submit </button>
+     </form>
   )
 }
 export default Login;
