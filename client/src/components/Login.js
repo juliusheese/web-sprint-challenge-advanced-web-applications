@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 //import { axiosWithAuth } from '../axiosAuth';
 //import BubblePage from "./BubblePage";
 import axios from 'axios';
 import BubblePage from './BubblePage';
 import { render } from '@testing-library/react';
+import { axiosWithAuth } from '../axiosWithAuth';
 
-const credentials= { username: 'Lambda School', password: 'i<3Lambd4' }
+
 const Login = () => {
 
-
+  const credentials= { username: 'Lambda School', password: 'i<3Lambd4' };
   //preventDefault();
 
-  axios
-    .post('http://localhost:5000/api/login ', credentials)
+  axiosWithAuth
+    .post('api/login ', credentials)
     .then(res => {
-      localStorage.setItem('token', res.data)
+      localStorage.setItem( 'token', res.data.payload);
+      props.history.push("./bubblepage");
     })
+
     .catch(error => {
       console.log(error)
     });

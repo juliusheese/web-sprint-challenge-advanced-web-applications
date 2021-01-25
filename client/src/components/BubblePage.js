@@ -6,12 +6,12 @@ import ColorList from "./ColorList";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
-
+  const token = localStorage.getItem('token');
   axios
-  .get('http://localhost:5000/api/colors', JSON.stringify(localStorage.getItem('token'))
+  .get('http://localhost:5000/api/colors', token.payload
   )
   .then(response => console.log(response))
-  .then(console.log(JSON.stringify(localStorage.getItem('token'))))
+  .then((console.log(token.payload)))
   
   .catch(error => {
     console.log(error)
