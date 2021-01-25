@@ -4,7 +4,10 @@ import BubblePage from "./components/BubblePage";
 
 import Login from "./components/Login";
 import "./styles.scss";
-
+/**componentDidMount( ){
+  axios.get('http://localhost:5000/api/colors');
+  console.log(axios.get('http://localhost:5000/api/colors'));
+} */
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -19,6 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 function App() {
+  
   return (
     <Router>
       <div className="App">
