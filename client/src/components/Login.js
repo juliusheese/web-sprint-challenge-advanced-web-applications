@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-//import { axiosWithAuth } from '../axiosAuth';
-//import BubblePage from "./BubblePage";
+
 import BubblePage from './BubblePage';
 import { render } from '@testing-library/react';
-import { axiosWithAuth } from '../axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 const Login = (props) => {
@@ -12,7 +11,7 @@ const Login = (props) => {
     username: "Lambda School",
     password: "i<3Lambd4",
   });
-  //preventDefault();
+
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -31,7 +30,7 @@ const Login = (props) => {
 
 
   return (
-    /** */
+
     <form  onSubmit={Login}>
       <div >
         <input     type="username"onChange={handleChange}/>
