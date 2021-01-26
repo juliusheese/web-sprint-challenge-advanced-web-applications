@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+import  axiosWithAuth  from '../utils/axiosWithAuth'
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
@@ -28,11 +28,3 @@ const BubblePage = () => {
 };
 
 export default BubblePage;
-
-
-
-
-
-
-
-

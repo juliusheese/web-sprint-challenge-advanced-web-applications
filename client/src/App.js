@@ -1,27 +1,28 @@
-import React, { Link, Switch, Redirect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import BubblePage from "./components/BubblePage";
-import PrivateRoute from './components/PrivateRoute'
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Login from "./components/Login";
+import BubblePage from "./components/BubblePage";
+import PrivateRoute from "./components/PrivateRoute";
 import "./styles.scss";
 
-
-
 function App() {
-
   return (
     <Router>
       <div className="App">
-        <Link to="login">Login</Link>
-        <Link to="/bubbles">Bubbles</Link>
+
+        <Switch>
+          <PrivateRoute exact path="/bubbles" component={BubblePage} />
+          <Redirect exact from="/bubbles/reload" to="/bubbles" />
+          <Route exact path="/" component={Login} />
+          <Route component={Login} />
+        </Switch>
       </div>
-      <Switch>
-        <PrivateRoute exact path="/bubbles" component={BubblePage} />
-        <Redirect exact from="/bubbles/reload" to="/bubbles" />
-        <Route exact path="/" component={Login} />
-        <Route component={Login} />
-      </Switch>
     </Router>
   );
 }

@@ -1,20 +1,96 @@
+
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import BubblePage from "./BubblePage";
-import Bubbles from "./Bubbles";
+import ColorList from './ColorList'
 
-import { axiosWithAuth as mockaxiosWithAuth } from "../utils/axiosWithAuth";
-jest.mock("../utils/axiosWithAuth");
+const bubbleData = [
+  {
+    color: 'aliceblue',
+    code: {
+      hex: '#f0f8ff'
+    },
+    id: 1
+  },
+  {
+    color: 'limegreen',
+    code: {
+      hex: '#99ddbc'
+    },
+    id: 2
+  },
+  {
+    color:"aqua",
+    code:{
+      hex:"#00ffff"
+  },
+  id:3},
+  {
+    color:"aquamarine",
+    code:{
+      hex:"#7fffd4"
+  }
+  ,id:4
+},
+  {
+    color: 'lilac',
+    code: {
+      hex: '#9a99dd'
+    },
+    id: 5
+  },
+  {
+    color: 'softpink',
+    code: {
+      hex: '#dd99ba'
+    },
+    id: 6
+  },
+  {
+    color: 'bisque',
+    code: {
+      hex: '#dd9a99'
+    },
+    id: 7
+  },
+  {
+    color: 'softyellow',
+    code: {
+      hex: '#dcdd99'
+    },
+    id: 8
+  },
+  {
+    color: 'blanchedalmond',
+    code: {
+      hex: '#ffebcd'
+    },
+    id: 9
+  },
+  {
+    color: 'blue',
+    code: {
+      hex: '#6093ca'
+    },
+    id: 10
+  },
+  {
+    color: 'blueviolet',
+    code: {
+      hex: '#8a2be2'
+    },
+    id: 11
+  }
+]
 
-const newBubbles = [
-  { code: { hex: "#DAF7A6" }, color: "greenishh", id: 1 },
-  { code: { hex: "#FFC300" }, color: "yellowishhh", id: 2 },
-];
+test("Fetches data and renders the bubbles", () => {
+  render(<BubblePage />)
 
-test("Fetches data and renders the bubbles", async () => {
-  mockaxiosWithAuth.mockResolvedValue(newBubbles);
-  render(<BubblePage />);
+  const { rerender } = render(<ColorList colors={[]} />)
 
-  const bubbles = screen.findByText(/bubble/i);
-  expect(await bubbles).toBeInTheDocument();
+  let bubbles = screen.queryAllByTestId(/color-list/i)
+  expect(bubbles).toHaveLength(0)
+  rerender(<ColorList colors={bubbleData} />)
+  bubbles = screen.getAllByTestId(/color-list/i)
+  expect(bubbles).toHaveLength(11)
 });
